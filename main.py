@@ -5,7 +5,7 @@ try:from PIL import Image,ImageDraw,ImageFont;import cairosvg
 except:sp.run([sys.executable,"-m","pip","install","pillow","cairosvg"],check=1);from PIL import Image,ImageDraw,ImageFont;import cairosvg
 
 # ============================================================================
-# CONFIGURATION - modify if u wanna to but don't question me if it don't work
+# CONFIGURATION - modify if u want to but don't question me if it don't work
 # ============================================================================
 
 # Resolution and timing

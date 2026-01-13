@@ -25,8 +25,6 @@ https://github.com/user-attachments/assets/1b8f777d-a85f-4afa-92c9-8bdebf56702c
 
 dark theme:
 
-https://github.com/user-attachments/assets/placeholder-dark
-
 https://github.com/user-attachments/assets/e1e74aab-0ee3-4a7b-95fe-b3df8c47c51a
 
 ## config

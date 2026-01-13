@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=LimeOS
+Description=LimeOS animated boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/limeos
+ScriptFile=/usr/share/plymouth/themes/limeos/limeos.script

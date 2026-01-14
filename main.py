@@ -56,8 +56,48 @@ def _frm(n,ic,bg,tc,dc,lc):
   for i in range(nd):a=math.radians(i*45+dr_);dx,dy=int(cx+r*math.cos(a)),int(cy+r*math.sin(a));f=.3+.7*((nd-1-i)/(nd-1));dr.ellipse([dx-dr2,dy-dr2,dx+dr2,dy+dr2],fill=dc+(int(do*f),))
  return im.convert('RGB')
 def _thm(o,f,bg):
- (o/"limeos.plymouth").write_text(f"[Plymouth Theme]\nName=LimeOS\nDescription=LimeOS animated boot splash\nModuleName=script\n\n[script]\nImageDir=/usr/share/plymouth/themes/limeos\nScriptFile=/usr/share/plymouth/themes/limeos/limeos.script\n")
- b=f"{bg[0]/255},{bg[1]/255},{bg[2]/255}";(o/"limeos.script").write_text(f"Window.SetBackgroundTopColor({b});Window.SetBackgroundBottomColor({b});frame_count={f+1};for(i=0;i<frame_count;i++){{frames[i]=Image(\"frame-\"+String(i).PadLeft(4,\"0\")+\".png\");}}current_frame=0;loop_start=91;sprite=Sprite();sprite.SetImage(frames[0]);sprite.SetX(Window.GetWidth()/2-frames[0].GetWidth()/2);sprite.SetY(Window.GetHeight()/2-frames[0].GetHeight()/2);fun refresh_callback(){{sprite.SetImage(frames[current_frame]);current_frame++;if(current_frame>=frame_count){{current_frame=loop_start;}}}}Plymouth.SetRefreshFunction(refresh_callback);fun progress_callback(duration,progress){{}}Plymouth.SetBootProgressFunction(progress_callback);")
+ (o/"limeos.plymouth").write_text("""[Plymouth Theme]
+Name=LimeOS
+Description=LimeOS animated boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/limeos
+ScriptFile=/usr/share/plymouth/themes/limeos/limeos.script
+""")
+ b=f"{bg[0]/255},{bg[1]/255},{bg[2]/255}"
+ (o/"limeos.script").write_text(f"""Window.SetBackgroundTopColor({b});
+Window.SetBackgroundBottomColor({b});
+
+frame_count = {f+1};
+
+for (i = 0; i < frame_count; i++) {{
+    frames[i] = Image("frame-" + String(i).PadLeft(4, "0") + ".png");
+}}
+
+current_frame = 0;
+loop_start = 91;
+
+sprite = Sprite();
+sprite.SetImage(frames[0]);
+sprite.SetX(Window.GetWidth() / 2 - frames[0].GetWidth() / 2);
+sprite.SetY(Window.GetHeight() / 2 - frames[0].GetHeight() / 2);
+
+fun refresh_callback() {{
+    sprite.SetImage(frames[current_frame]);
+    current_frame++;
+    if (current_frame >= frame_count) {{
+        current_frame = loop_start;
+    }}
+}}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun progress_callback(duration, progress) {{
+}}
+
+Plymouth.SetBootProgressFunction(progress_callback);
+""")
 def _gen(bg,tc,dc,lc,nm):
  o=_D/f"output-{nm}";o.mkdir(parents=True,exist_ok=True);[f.unlink()for f in o.glob("frame-*.png")]
  print(f"Generating {nm} theme: {o}");ic={}

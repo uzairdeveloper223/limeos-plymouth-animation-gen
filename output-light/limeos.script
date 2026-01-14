@@ -1,1 +1,31 @@
-Window.SetBackgroundTopColor(1.0,1.0,1.0);Window.SetBackgroundBottomColor(1.0,1.0,1.0);frame_count=151;for(i=0;i<frame_count;i++){frames[i]=Image("frame-"+String(i).PadLeft(4,"0")+".png");}current_frame=0;loop_start=91;sprite=Sprite();sprite.SetImage(frames[0]);sprite.SetX(Window.GetWidth()/2-frames[0].GetWidth()/2);sprite.SetY(Window.GetHeight()/2-frames[0].GetHeight()/2);fun refresh_callback(){sprite.SetImage(frames[current_frame]);current_frame++;if(current_frame>=frame_count){current_frame=loop_start;}}Plymouth.SetRefreshFunction(refresh_callback);fun progress_callback(duration,progress){}Plymouth.SetBootProgressFunction(progress_callback);
+Window.SetBackgroundTopColor(1.0,1.0,1.0);
+Window.SetBackgroundBottomColor(1.0,1.0,1.0);
+
+frame_count = 151;
+
+for (i = 0; i < frame_count; i++) {
+    frames[i] = Image("frame-" + String(i).PadLeft(4, "0") + ".png");
+}
+
+current_frame = 0;
+loop_start = 91;
+
+sprite = Sprite();
+sprite.SetImage(frames[0]);
+sprite.SetX(Window.GetWidth() / 2 - frames[0].GetWidth() / 2);
+sprite.SetY(Window.GetHeight() / 2 - frames[0].GetHeight() / 2);
+
+fun refresh_callback() {
+    sprite.SetImage(frames[current_frame]);
+    current_frame++;
+    if (current_frame >= frame_count) {
+        current_frame = loop_start;
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun progress_callback(duration, progress) {
+}
+
+Plymouth.SetBootProgressFunction(progress_callback);
